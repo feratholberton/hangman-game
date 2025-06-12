@@ -1,36 +1,29 @@
 from get_random_word import get_random_word
 from write_hidden_word import write_hidden_word
+from hang_man_draw import hang_man_draw
+from words_to_guess import words_to_guess
 
-str = '''
- O 
-/|\\
-/ \\
-'''
-# print(str)
-
-words = ['Hello Baby', 'Some Fresh Air', 'Goodby', 'Success', 'Monster', 'Give Me Space']
-# words = ['Give Me Space']
-# words = []
 life = 3
-word = get_random_word(words)
-current_word = write_hidden_word(word)
+word = get_random_word(words_to_guess)
+hidden_word = write_hidden_word(word)
 
+print(hang_man_draw)
 print(f'The word selected is "{word}"')
 print(f'Guesses left: {life}')
-print(''.join(current_word))
+print(''.join(hidden_word))
 
 while life != 0:
-  input_letter = input("Enter a letter: ")
-  if input_letter not in word:
+  input_letter = input("Enter a letter: ").lower()
+  if input_letter not in word.lower():
     life -= 1
   else:
-    for idx, letter in enumerate(word):
-      if letter.lower() == input_letter.lower():
-        current_word[idx] = letter
+    for index, letter in enumerate(word):
+      if letter.lower() == input_letter:
+        hidden_word[index] = letter
 
   print(f'You entered: {input_letter}')
   print(f'Guesses remainig: {life}')
-  print('Current word:', ''.join(current_word))
+  print('Current word:', ''.join(hidden_word))
   print()
 
   # try:
