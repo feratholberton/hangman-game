@@ -1,37 +1,31 @@
-import random
 import os
+from get_random_word import get_random_word
 
 str = '''
  O 
 /|\\
 / \\
 '''
+# print(str)
 
 words = ['Hello Baby', 'Some Fresh Air', 'Goodby', 'Success', 'Monster', 'Give Me Space']
+# words = []
 life = 3
-
-print(str)
 
 def clear_console():
   os.system('cls' if os.name == 'nt' else 'clear')
-
-def get_random_word(list_of_words):
-  value = random.randint(0, (len(list_of_words) - 1))
-  selected_word = list_of_words[value]
-  return selected_word
 
 def count_letters(selected_word):
   number_of_letters = len(selected_word)
   return number_of_letters
 
 def write_hidden_word(word):
-  
   hidden_word = ''
   for letter in word:
     if letter == ' ':
-      hidden_word.join(' ')
+      hidden_word += ' '
     else:
-      hidden_word.join('_')
+      hidden_word += '_'
     return hidden_word
 
 word = get_random_word(words)
@@ -50,22 +44,20 @@ print()
 print()
 #current_word = print_list_first_time(word)
 
-current_word = ''
+current_word = [' ' if c == ' ' else '_' for c in word]
 while life != 0:
   #print(print_list_first_time(word))
   input_letter = input("Enter a letter: ")
   if input_letter not in word:
     life -= 1
   else:
-    for letter in word:
-      if letter == input_letter:
-        current_word.join(letter)
-      else:
-        current_word.join('_')
+    for idx, letter in enumerate(word):
+      if letter.lower() == input_letter.lower():
+        current_word[idx] = letter
 
   print(f'You entered: {input_letter}')
   print(f'Life remainig: {life}')
-  print(f'Currente word: {current_word}', end='\n')
+  print('Current word:', ''.join(current_word))
 
   try:
     pass
