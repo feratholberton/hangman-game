@@ -19,14 +19,20 @@ while life != 0:
   letter = get_letter()
   hidden_word, life = check_letter_in_word(letter, word, hidden_word, life)
 
-  print(f'You entered: {letter}')
-  print(f'Guesses remainig: {life}')
-  print('Current word:', ''.join(hidden_word))
-  print()
+  if '_' not in hidden_word:
+    print("😎 You guessed the word!")
+    break
+  elif life == 0:
+    print("💩 You are such a looser!")
+    print(f'💀 Guesses remainig: {life}')
+    print(f'The word was: "{word}"')
+    break
+  else:
+    print(f'⌨️  You entered: {letter}')
+    print(f'❤️  Guesses remainig: {life}')
+    print(f'🕵️  Current word: {''.join(hidden_word)}')
+    print()
 
 # import os
 # def clear_console():
 #   os.system('cls' if os.name == 'nt' else 'clear')
-#Give me space
-# #___e _e ____e
-#[e]
